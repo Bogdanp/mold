@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        Normal: {+content.upper()}
+        Escaped: {@content}
+
+        <ul>
+          {*elements}
+            {>item.mold.html}
+          {end}
+        </ul>
+    </body>
+</html>

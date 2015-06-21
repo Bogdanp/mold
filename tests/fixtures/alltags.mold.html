@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>A raw variable: {@x}</h1>
+        <h1>An escaped variable: {+x}</h1>
+
+        {?elements}
+        <ul>
+            {*elements}
+                {>item.mold.html}
+            {end}
+        </ul>
+        {end}
+
+        {!elements}
+            <p>No elements!</p>
+        {end}
+    </body>
+</html>

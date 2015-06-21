@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        Normal: {{content|upper}}
+        Escaped: {{content|e}}
+
+        <ul>
+          {% for item in elements %}
+            {% include "item.jinja.html" %}
+          {% endfor %}
+        </ul>
+    </body>
+</html>
