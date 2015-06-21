@@ -15,11 +15,7 @@ r4 = j.get_template("extend_example_child.jinja.html").render
 r5 = j.get_template("extend_example.jinja.html").render
 r6 = partial(j.get_template("example.jinja.html").render, content="hello", elements=["a"])
 
-timeit = partial(timeit.timeit, number=int(1e4))
-
-print(r1())
-print(r2())
-print(r3())
+timeit = partial(timeit.timeit, number=int(1e7))
 
 print("Sit back and relax...")
 print("Mold times:")
