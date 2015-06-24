@@ -7,7 +7,6 @@ BASE_VARIABLE_RE = r"([a-zA-Z_][a-zA-Z0-9]*)"
 VARIABLE_RE = r"{}([^}}]+)?".format(BASE_VARIABLE_RE)
 FILENAME_RE = r"([^}]+)"
 TOKENS = (
-    ("newline", r"\n"),
     ("chunk", r"[^{]+"),
     ("end", r"{end}"),
     ("escaped_bracket", r"{{"),
@@ -40,8 +39,11 @@ def tokenize(filename, template):
     :returns:
       A :class:`.Token` generator.
     """
-    chunks = []  # Keep track of and merge consecutive chunks.
-    chunk_like = TokenKind.newline, TokenKind.chunk, TokenKind.escaped_bracket
+    # Keep track of and merge consecutive chunks.
+    chunks = []
+    chunk_like = TokenKind.chunk, TokenKind.escaped_bracket
+    make_chunk = lambda: Token(TokenKind.chunk, "".join(chunks), filename, cline, ccolumn)
+
     line, column = 1, 0
     for match in TOKENIZER.finditer(template):
         kind = match.lastgroup
@@ -65,7 +67,7 @@ def tokenize(filename, template):
             column += len(value) - value.rfind("\n") - 1
         else:
             if chunks:
-                yield Token(TokenKind.chunk, "".join(chunks), filename, cline, ccolumn)
+                yield make_chunk()
                 chunks = []
 
             if kind == TokenKind.end:
@@ -87,4 +89,4 @@ def tokenize(filename, template):
             column += len(value)
 
     if chunks:
-        yield Token(TokenKind.chunk, "".join(chunks), filename, cline, ccolumn)
+        yield make_chunk()
