@@ -3,7 +3,7 @@ import re
 from collections import namedtuple
 from functools import partial
 
-BASE_VARIABLE_RE = r"([a-zA-Z_][a-zA-Z0-9]*)"
+BASE_VARIABLE_RE = r"([a-zA-Z_][a-zA-Z0-9_]*)"
 VARIABLE_RE = r"{}([^}}]+)?".format(BASE_VARIABLE_RE)
 FILENAME_RE = r"([^}]+)"
 TOKENS = (

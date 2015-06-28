@@ -32,3 +32,9 @@ def test_nil_variable():
         template.render().strip()
 
     assert template.render(idontexist="hello").strip() == "<h1>hello</h1>"
+
+
+def test_underscores():
+    template = env.get_template("underscores.mold.html")
+
+    assert template.render(csrf_token="a").strip() == "a"
