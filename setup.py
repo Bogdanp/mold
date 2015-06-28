@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pymold",
-    version="0.1.1",
+    version="0.1.2",
     description="A simple, fast template engine for Python.",
     long_description="https://github.com/Bogdanp/mold",
     packages=["mold"],
