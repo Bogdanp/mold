@@ -5,6 +5,7 @@ from .template import Template
 from .tokenizer import TokenKind
 
 LOOKUP = "context.lookup({!r}){}"
+LOOKUP_NIL = "context.lookup({!r}, []){}"
 RAW = "str({})".format(LOOKUP)
 VAR = "escape({})".format(RAW)
 WHEN = "{func}(blocks, context) if {var} else ''"
@@ -71,7 +72,7 @@ def gennode(env, node, blocks):
             TokenKind.when: WHEN,
             TokenKind.unless: UNLESS,
             TokenKind.foreach: FOREACH
-        }[node.kind].format(func=itername, var=LOOKUP.format(*var))
+        }[node.kind].format(func=itername, var=LOOKUP_NIL.format(*var))
 
 
 def genfunc(env, filename, name, nodes):
