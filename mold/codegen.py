@@ -77,8 +77,8 @@ def gennode(env, node, blocks):
 
 def genfunc(env, filename, name, nodes):
     blocks = Context(filename)
-    nodes = ", ".join(filter(lambda x: x is not None, (gennode(env, x, blocks) for x in nodes)))
-    source = FUNCTION.format(name=name, nodes=nodes)
+    nodes = (gennode(env, x, blocks) for x in nodes)
+    source = FUNCTION.format(name=name, nodes=", ".join(node for node in nodes if node))
     exec(source, env.context, env.context)
 
     function = env.context[name]
